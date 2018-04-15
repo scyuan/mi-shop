@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/views/Home'
 import Category from '@/views/Category'
+import ShopCart from '@/views/ShopCart'
+import Personal from '@/views/Personal'
 Vue.use(Router)
 
 export default new Router({
@@ -15,6 +17,16 @@ export default new Router({
     	path:'/category',
     	name:'Category',
     	component:Category
+    },
+    {
+      path:'/shopcart',
+      name:'ShopCart',
+      component:ShopCart
+    },
+    {
+      path:'/me',
+      name:'Personal',
+      component:Personal
     }
   ]
 })

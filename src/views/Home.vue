@@ -289,7 +289,7 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 	position: relative;
 }
 .nav-item span{
-	line-height: 1.05rem;
+	line-height: 1rem;
 	font-size: 0.38rem;
 	color: #525252;
 	height: 100%;
@@ -313,10 +313,7 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 .swiper-container-horizontal > .swiper-pagination-bullets{
 	bottom: -4px;
 }
-.white-bullet-active{
-	background: #fff;
-	opacity: 1;
-}
+
 .nav-mid{
 	display: flex;
 }

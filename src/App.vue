@@ -2,8 +2,11 @@
   <div>
     
     <div class="app-content">
-      <router-view></router-view>
-
+      <transition :name='transitionName'>
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
+      </transition>
 
       <footer class="footer">
       <span v-for='(item, index) in footerMenuList' :class="{'menu_active':index === footerMenuIndex}">
@@ -27,29 +30,44 @@ export default {
   data(){
     return{
       footerMenuIndex:0,
+      transitionName:'slide-left',
       footerMenuList:[
         {
           text:'首页',
-          icon:'&#xe699;'
+          icon:'&#xe699;',
+          path:'/',
         },
         {
           text:'分类',
-          icon:'&#xe635;'
+          icon:'&#xe635;',
+          path:'/category'
         },
         {
           text:'购物车',
-          icon:'&#xe899;'
+          icon:'&#xe899;',
+          path:'/shopcart'
         },
         {
           text:'我的',
-          icon:'&#xe64f;'
+          icon:'&#xe64f;',
+          path:'/me'
         },
       ]
+    }
+  },
+  watch:{
+    'footerMenuIndex' (newIndex, oldIndex){
+      if(newIndex>oldIndex){
+        this.transitionName = 'slide-left'
+      }else{
+        this.transitionName = 'slide-right'
+      }
     }
   },
   methods:{
     open(index){
       this.footerMenuIndex = index;
+      this.$router.push({path:this.footerMenuList[index].path});
     }
   }
 }
@@ -58,12 +76,32 @@ export default {
 <style>
 @font-face {
   font-family: 'iconfont';  /* project id 624613 */
-  src: url('//at.alicdn.com/t/font_624613_nzjvj0lnsv23mcxr.eot');
-  src: url('//at.alicdn.com/t/font_624613_nzjvj0lnsv23mcxr.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_624613_nzjvj0lnsv23mcxr.woff') format('woff'),
-  url('//at.alicdn.com/t/font_624613_nzjvj0lnsv23mcxr.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_624613_nzjvj0lnsv23mcxr.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_624613_lrb49fpmrlmu0udi.eot');
+  src: url('//at.alicdn.com/t/font_624613_lrb49fpmrlmu0udi.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_624613_lrb49fpmrlmu0udi.woff') format('woff'),
+  url('//at.alicdn.com/t/font_624613_lrb49fpmrlmu0udi.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_624613_lrb49fpmrlmu0udi.svg#iconfont') format('svg');
 }
+.slide-left-enter,.slide-left-leave-to{
+  transform: translateX(-100%);
+}
+.slide-left-enter-to,.slide-left-leave{
+  transform: translate(0);
+}
+.slide-left-enter-active,.slide-left-leave-active{
+  transition: all 0.3s;
+}
+
+.slide-right-enter,.slide-right-leave-to{
+  transform: translateX(100%);
+}
+.slide-right-enter-to,.slide-right-leave{
+  transform: translate(0);
+}
+.slide-right-enter-active,.slide-right-leave-active{
+  transition: all 0.3s;
+}
+
 .icon{
   font-family: 'iconfont';
   font-style: normal;
@@ -86,6 +124,10 @@ body{
 #app{
   height: 100%;
   background: #fff;
+}
+.white-bullet-active{
+  background: #fff;
+  opacity: 1;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

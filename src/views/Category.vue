@@ -1,10 +1,6 @@
 <template>
 	<div class="category">
-		<div class="category-title">
-			<i class="icon icon-back">&#xe624;</i>
-			<p>分类</p>
-			<i class="icon icon-search">&#xe607;</i>
-		</div>
+		<back-header :title='title'></back-header>
 		<div class="category-content">
 			<div class="category-left" ref='leftView'>
 				<ul>
@@ -455,13 +451,18 @@
 	</div>
 </template>
 <script>
+import BackHeader from '@/components/BackHeader'
 	export default{
 		data(){
 			return{
+				title:'分类',
 				menuLiIndex:0,
 				categoryMenuList:["新品","手机","电视","电脑","家电","路由","智能","儿童","电源","耳机","音箱","礼品","生活","服务","米粉卡","零售店"],
 				offset:[]
 			}
+		},
+		components:{
+			BackHeader
 		},
 		methods:{
 			scroll(){
@@ -506,26 +507,7 @@
 </script>
 <style scoped>
 	
-.category-title{
-	height: 1.5rem;
-	background: #f2f2f2;
-	color: #666;
-	display: flex;
-	font-size: 0.426667rem;
-}
-.category-title p{
-	margin:0;
-	flex: 1;
-	text-align: center;
-	line-height: 1.5rem;
-}
-.icon-back,.icon-search{
-	height: 1.5rem;
-	width: 1.5rem;
-	text-align: center;
-	line-height: 1.5rem;
-	font-size: 0.586667rem;
-}
+
 .category-content{
 	position: absolute;
 	top: 1.5rem;
@@ -555,6 +537,7 @@
 }
 .menuLi span{
 	transition: all 0.3s;
+	color: rgba(0,0,0,0.6);
 }
 .category-box{
 	padding: 0.133333rem 0.533333rem;
@@ -575,19 +558,21 @@
 	content: '';
 	height: 1px;
 	width: 0.533333rem;
-	background: black;
+	background: rgba(0,0,0,0.54);
 	position: absolute;
 	left: -0.666667rem;
 	top: 0.24rem;
+
 }
 .box-title span::after{
 	content: '';
 	height: 1px;
 	width: 0.533333rem;
-	background: black;
+	background: rgba(0,0,0,0.54);
 	position: absolute;
 	right: -0.666667rem;
 	top: 0.24rem;
+	
 }
 .box-item{
 	float: left;
@@ -602,6 +587,7 @@
 }
 .box-item p{
 	line-height: 0.64rem;
+	color: rgba(0,0,0,0.54);
 }
 .menuLiActive span{
 	color: #ea625b;
