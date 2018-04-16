@@ -1,0 +1,267 @@
+<template>
+	<div class="product">
+		<div class="product-img-wrap">
+			<i class="icon back">&#xe624;</i>
+			<swiper :options="swiperOption" ref="mySwiper">
+			    <!-- slides -->
+			    <swiper-slide v-for='item in banner_list'><img :src="item.src" alt=""></swiper-slide>
+			    
+			    <!-- Optional controls -->
+			    <div class="swiper-pagination"  slot="pagination"></div>
+			</swiper>
+		</div>
+
+		<div class="product-panel">
+			<p class="desc">小米Note3 人脸解锁</p>
+			<p class="activity"> 【手机品牌日限时特惠：128GB 今早10点限时特价秒杀。6+64GB直降200元，4+64GB直降100元。全系可享小米分期最高6期免息】</p>
+			<p class="more-desc"> 1600万美颜自拍 / 2倍变焦双摄，四轴光学防抖 / 5.5"护眼屏 / 超轻四曲面，7系铝金属边框。 </p>
+			<p class="price"><span class="price-now">￥1999</span><span class="price-before">￥2999</span><span class="price-activity">直降1000元</span></p>
+			<div class="line">
+				<span>促销</span>
+				<p><span class="z">赠品</span>赠吃到饱卡</p>
+				<i class="icon">&#xe64a;</i>
+			</div>
+		</div>
+		<div class="buy-panel">
+			<div class="line border">
+				<span>已选</span>
+				<p>小米Note3 4GB+64GB 黑色 x1</p>
+				<i class="icon">&#xe64a;</i>
+			</div>
+			<div class="line">
+				<span>送至</span>
+				<p>上海市 松江区 <span class="s">有现货</span></p>
+				<i class="icon">&#xe64a;</i>
+			</div>
+			<div class="line tuihuo">
+				
+				<p><i class="icon">&#xe602;</i>支持7天无理由退货</p>
+				
+			</div>
+		</div>
+		<div class="panel line">
+			<span>配件</span>
+			<p></p>
+			<i class="icon">&#xe64a;</i>
+		</div>
+
+		<div class="product-bg">
+			<img src="//i8.mifile.cn/v1/a1/f6b42e48-8af9-c1c1-5df2-eb1973499aae.jpg?w=1080&h=1735&s=192.6" alt="">
+			<img src="//i8.mifile.cn/v1/a1/eb3d5e39-000d-bfb9-acce-e346876cfa94.jpg?w=1080&h=1387&s=171.9" alt="">
+			<img src="//i8.mifile.cn/v1/a1/5bb89342-dce9-82d4-59c7-a322376fc1a8.jpg?w=1080&h=1735&s=164" alt="">
+			<img src="//i8.mifile.cn/v1/a1/8ba93f97-a966-088d-7aa0-21f3a50f08ea.jpg?w=1080&h=1201&s=120.4" alt="">
+			<img src="//i8.mifile.cn/v1/a1/1f2ccbc5-8a7c-39ab-9819-5aec14d533b5.jpg?w=1080&h=1445&s=150.1" alt="">
+			<img src="//i8.mifile.cn/v1/a1/9356b62d-e15b-a208-72f0-709fe24f6c48.jpg?w=1080&h=996&s=193.1" alt="">
+			<img src="//i8.mifile.cn/v1/a1/a5b0856b-888b-dc1b-a35c-2981dd0e35d3.jpg?w=1080&h=1445&s=169" alt="">
+			<img src="//i8.mifile.cn/v1/a1/f8e52783-b598-2dfd-7057-52c285515119.jpg?w=1080&h=1735&s=191.4" alt="">
+		</div>
+		<div class="add-to-cart">
+			<div class="left-icon">
+				<p class="home-i">
+					<i class="icon">&#xe626;</i>
+					<span>首页</span>
+				</p>
+				<p class="cart-i">
+					<i class="icon">&#xe899;</i>
+					<span>购物车</span>
+				</p>
+			</div>
+			<div class="add">
+				加入购物车
+			</div>
+		</div>
+	</div>
+</template>
+<script>
+import 'swiper/dist/css/swiper.css'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+	export default{
+		data(){
+			return{
+				banner_list:[
+					{
+						src:'//cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/7e98be403a5f4277adba84acaecb9c76.jpg?bg=6D96C7'
+					},
+					{
+						src:'//cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/568b07688b343f667c7040a968f3ee97.jpg?bg=FFFFFF'
+					},
+					{
+						src:'//cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/4ee66087b538923642701afa069f0fb9.jpg?bg=41424E'
+					},
+					{
+						src:'//cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/e0f474b9d70fea836f25c50e93d46af7.jpg?bg=3E404B'
+					}
+				],
+				swiperOption: {
+		          pagination:{
+		          	el:'.swiper-pagination',
+		          	clickable:true,
+		          	bulletActiveClass: 'white-bullet-active',
+		          }
+		        }
+			}
+		},
+		components:{
+			swiper, swiperSlide
+		}
+	}
+</script>
+<style scoped>
+.product-img-wrap{
+	position: relative;
+}
+.product-img-wrap img{
+	width: 100%;
+	height: auto;
+	vertical-align: top;
+}
+.product-panel{
+	background: #fff;
+	padding: 0.266667rem 0.4rem;
+	font-size: 0.32rem;
+	margin-bottom: 0.213333rem;
+	padding-bottom: 0;
+}
+.product-panel .desc{
+	font-size: 0.48rem;
+}
+.product-panel .activity{
+	color: rgb(255,74,0);
+	margin-top: 0.133333rem;
+}
+.product-panel .more-desc{
+	color: rgb(117,117,117);
+	margin-top: 0.133333rem;
+}
+.product-panel .price{
+	margin-top: 0.133333rem;
+}
+.price span{
+	margin-right: 0.133333rem;
+}
+.price .price-now{
+	font-size: 0.533333rem;
+	color: rgb(255,74,0);
+	font-weight: bold;
+}
+.price .price-before{
+	text-decoration: line-through;
+	font-size: 0.373333rem;
+	color: #999;
+}
+.price .price-activity{
+	padding: 0 0.106667rem;
+	background: rgb(255,74,0);
+	color: #fff;
+	border-radius: 0.133333rem;
+}
+.line{
+	height: 0.96rem;
+	line-height: 0.96rem;
+	position: relative;
+	font-size: 0.32rem;
+}
+.border{
+	border-bottom: 1px solid #eee;
+}
+.line>span{
+	width: 1.44rem;
+	float: left;
+	color: #aaa;
+}
+.line>i{
+	height: 0.96rem;
+	width: 0.96rem;
+	float: right;
+	text-align: right;
+}
+.line>p{
+	width: 100%;
+	position: absolute;
+	padding-left: 1.173333rem;
+}
+.line>p .z{
+	color: rgb(255,74,0);
+	border: 1px solid rgb(255,74,0);
+	padding: 0 0.133333rem;
+	margin-right: 0.133333rem;
+}
+.line>p .s{
+	color: rgb(255,74,0);
+	margin-left: 0.133333rem;
+}
+.buy-panel{
+	background: #fff;
+	margin-bottom: 0.106667rem;
+	padding: 0 0.4rem;
+}
+.panel{
+	background: #fff;
+	padding: 0 0.4rem;
+}
+.tuihuo>p{
+	color: #aaa;
+}
+
+.product-bg img{
+	width: 100%;
+	height: auto;
+	vertical-align: top;
+}
+.add-to-cart{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 1.44rem;
+	
+	box-shadow: 1px -1px 10px rgba(0,0,0,0.1);
+}
+.left-icon{
+	float: left;
+	height: 100%;
+	width: 4.0rem;
+	background: #fff;
+	padding: 0.133333rem 0;
+	text-align: center;
+	color: #aaa;
+}
+.add{
+	width: 100%;
+	background: rgb(255,74,0);
+	color: #fff;
+	height: 100%;
+	font-size: 0.4rem;
+	text-align: center;
+	line-height: 1.44rem;
+}
+.left-icon p:nth-child(1){
+	border-right: 1px solid #eee;
+}
+.left-icon p i{
+	font-size: 0.533333rem;
+	display: block;
+	padding-top: 0.133333rem;
+}
+.left-icon p{
+	float: left;
+	width: 50%;
+	height: 100%;
+	font-size: 0.32rem;
+}
+.back{
+	width: 0.853333rem;
+	height: 0.853333rem;
+	display: block;
+	position: absolute;
+	left: 0.4rem;
+	top: 0.4rem;
+	border-radius: 0.426667rem;
+	background: rgba(0,0,0,0.5);
+	color: #fff;
+	font-size: 0.426667rem;
+	text-align: center;
+	line-height: 0.853333rem;
+	z-index: 10;
+}
+</style>

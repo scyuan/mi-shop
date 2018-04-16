@@ -4,6 +4,7 @@ import Home from '@/views/Home'
 import Category from '@/views/Category'
 import ShopCart from '@/views/ShopCart'
 import Personal from '@/views/Personal'
+import Product from '@/views/Product'
 Vue.use(Router)
 
 export default new Router({
@@ -27,6 +28,11 @@ export default new Router({
       path:'/me',
       name:'Personal',
       component:Personal
+    },
+    {
+      path:"/product/:productId",
+      name:'Product',
+      component:Product
     }
   ]
 })

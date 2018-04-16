@@ -1,6 +1,8 @@
 <template>
 	<div class="cart">
+
 		<back-header :title='title'></back-header>
+
 		<div class="cart-content">
 			
 			<a class="not-login"><p class="lowprice">登陆后享受更多优惠</p><p class="tologin">去登录<i class="icon">&#xe64a;</i></p></a>
@@ -81,6 +83,13 @@ import BackHeader from '@/components/BackHeader'
 	}
 </script>
 <style scoped>
+/*.cart{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}*/
 .cart-content{
 	background: #fff;
 	position: absolute;

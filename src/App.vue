@@ -8,13 +8,14 @@
         </keep-alive>
       </transition>
 
-      <footer class="footer">
-      <span v-for='(item, index) in footerMenuList' :class="{'menu_active':index === footerMenuIndex}">
-        <i class="icon" v-html='item.icon' @click='open(index)'></i>
-        {{item.text}}
-      </span>
-     
-    </footer>
+      <transition name='footerTransition'>
+        <footer class="footer" v-show='footer_show'>
+          <span v-for='(item, index) in footerMenuList' :class="{'menu_active':index === footerMenuIndex}">
+            <i class="icon" v-html='item.icon' @click='open(index)'></i>
+            {{item.text}}
+          </span>
+        </footer>
+      </transition>
     </div>
     
     
@@ -29,6 +30,7 @@ export default {
   name: 'App',
   data(){
     return{
+      footer_show:true,
       footerMenuIndex:0,
       transitionName:'slide-left',
       footerMenuList:[
@@ -74,32 +76,45 @@ export default {
 </script>
 
 <style>
+.category,.home,.me,.product,.cart{
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
 @font-face {
   font-family: 'iconfont';  /* project id 624613 */
-  src: url('//at.alicdn.com/t/font_624613_lrb49fpmrlmu0udi.eot');
-  src: url('//at.alicdn.com/t/font_624613_lrb49fpmrlmu0udi.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_624613_lrb49fpmrlmu0udi.woff') format('woff'),
-  url('//at.alicdn.com/t/font_624613_lrb49fpmrlmu0udi.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_624613_lrb49fpmrlmu0udi.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_624613_ifg9lrsedwunb3xr.eot');
+  src: url('//at.alicdn.com/t/font_624613_ifg9lrsedwunb3xr.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_624613_ifg9lrsedwunb3xr.woff') format('woff'),
+  url('//at.alicdn.com/t/font_624613_ifg9lrsedwunb3xr.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_624613_ifg9lrsedwunb3xr.svg#iconfont') format('svg');
 }
-.slide-left-enter,.slide-left-leave-to{
+.slide-left-leave-to{
   transform: translateX(-100%);
+}
+.slide-left-enter{
+  transform: translateX(100%);
 }
 .slide-left-enter-to,.slide-left-leave{
   transform: translate(0);
 }
 .slide-left-enter-active,.slide-left-leave-active{
-  transition: all 0.3s;
+  transition: all .3s;
 }
 
-.slide-right-enter,.slide-right-leave-to{
+.slide-right-leave-to{
   transform: translateX(100%);
+}
+.slide-right-enter{
+  transform: translateX(-100%);
 }
 .slide-right-enter-to,.slide-right-leave{
   transform: translate(0);
 }
 .slide-right-enter-active,.slide-right-leave-active{
-  transition: all 0.3s;
+  transition: all .3s;
 }
 
 .icon{
@@ -143,6 +158,7 @@ body{
   left: 0;
   bottom: 0;
   right: 0;
+
 }
 .footer{
   height: 1.43rem;
