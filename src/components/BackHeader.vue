@@ -1,18 +1,45 @@
 <template>
-	<div class="backheader">
+	<transition name='header-slide'>
+	<div class="backheader" v-show='show'>
 		<div class="category-title">
-			<i class="icon icon-back">&#xe624;</i>
+			<i class="icon icon-back" @click='$router.back()'>&#xe624;</i>
 			<p>{{title}}</p>
-			<i class="icon icon-search">&#xe607;</i>
+			<i class="icon icon-search" @click='$router.push({path:"/search"})'>&#xe607;</i>
 		</div>
 	</div>
+	</transition>
 </template>
 <script>
 	export default{
-		props:["title"]
+		props:["title"],
+		data(){
+			return{
+				show:false
+			}
+		},
+		methods:{
+			showMe(){
+				
+				this.show = true;
+			},
+			hideMe(){
+			
+				setTimeout(function(){this.show = false;},10);
+				
+			}
+		}
 	}
 </script>
 <style scoped>
+.header-slide-enter,.header-slide-leave-to{
+	transform: translateY(-100%);
+}
+.header-slide-enter-to,.header-slide-leave{
+	transform: translateY(0);
+}
+.header-slide-enter-active,.header-slide-leave-active{
+	transition: all .5s;
+}
 .category-title{
 	height: 1.5rem;
 	background: #f2f2f2;

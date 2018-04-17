@@ -1,7 +1,7 @@
 <template>
 	<div class="product">
 		<div class="product-img-wrap">
-			<i class="icon back">&#xe624;</i>
+			<i class="icon back" @click='$router.back()'>&#xe624;</i>
 			<swiper :options="swiperOption" ref="mySwiper">
 			    <!-- slides -->
 			    <swiper-slide v-for='item in banner_list'><img :src="item.src" alt=""></swiper-slide>
@@ -57,11 +57,11 @@
 		</div>
 		<div class="add-to-cart">
 			<div class="left-icon">
-				<p class="home-i">
+				<p class="home-i" @click='go("/home")'>
 					<i class="icon">&#xe626;</i>
 					<span>首页</span>
 				</p>
-				<p class="cart-i">
+				<p class="cart-i" @click='go("/shopcart")'>
 					<i class="icon">&#xe899;</i>
 					<span>购物车</span>
 				</p>
@@ -101,12 +101,20 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 		        }
 			}
 		},
+		methods:{
+			go(href){
+				this.$router.push({path:href});
+			}
+		},
 		components:{
 			swiper, swiperSlide
 		}
 	}
 </script>
 <style scoped>
+.product{
+	overflow-y: auto;
+}
 .product-img-wrap{
 	position: relative;
 }

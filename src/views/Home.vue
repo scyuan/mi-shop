@@ -6,7 +6,7 @@
 					<img src="@/assets/img/logo.png" alt="">
 				</div>
 				<div class="header-search-mid">
-					<div class="fake-input">
+					<div class="fake-input" @click='go("/search")'>
 						<i class="icon">&#xe607;</i>
 						搜索商品名称
 					</div>
@@ -26,7 +26,7 @@
 		<div class="scroll-box">
 			<swiper :options="swiperOption" ref="mySwiper">
 			    <!-- slides -->
-			    <swiper-slide v-for='item in banner_list'><img :src="item.src" alt=""></swiper-slide>
+			    <swiper-slide v-for='item in banner_list'><img :src="item.src" alt="" @click='detail(item.href)'></swiper-slide>
 			    
 			    <!-- Optional controls -->
 			    <div class="swiper-pagination"  slot="pagination"></div>
@@ -179,19 +179,19 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 				banner_list:[
 				  {
 		            src: 'http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/01.png',
-		            href: '/detail/1001'
+		            href: '/product/1001'
 		          },
 		          {
 		            src: 'http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/02.jpg',
-		            href: '/detail/1002'
+		            href: '/product/1002'
 		          },
 		          {
 		            src: 'http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/03.jpg',
-		            href: '/detail/1003'
+		            href: '/product/1003'
 		          },
 		          {
 		            src: 'http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/04.jpg',
-		            href: '/detail/1004'
+		            href: '/product/1004'
 		          }
 		        ],
 				swiperOption: {
@@ -211,7 +211,13 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 			openNav(index){
 				this.navActiveIndex = index ;
 				console.log(this.$refs.nav.width);
-			}
+			},
+			detail(href){
+				this.$router.push({path:href});
+			},
+			go(href){
+				this.$router.push({path:href});
+			},
 		},
 		components:{
 			swiper, swiperSlide

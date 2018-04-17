@@ -5,6 +5,7 @@ import Category from '@/views/Category'
 import ShopCart from '@/views/ShopCart'
 import Personal from '@/views/Personal'
 import Product from '@/views/Product'
+import Search from '@/views/Search'
 Vue.use(Router)
 
 export default new Router({
@@ -33,6 +34,11 @@ export default new Router({
       path:"/product/:productId",
       name:'Product',
       component:Product
+    },
+    {
+      path:"/search",
+      name:'Search',
+      component:Search
     }
   ]
 })

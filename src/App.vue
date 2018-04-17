@@ -3,9 +3,7 @@
     
     <div class="app-content">
       <transition :name='transitionName'>
-        <keep-alive>
-          <router-view></router-view>
-        </keep-alive>
+        <router-view></router-view>
       </transition>
 
       <transition name='footerTransition'>
@@ -64,6 +62,16 @@ export default {
       }else{
         this.transitionName = 'slide-right'
       }
+    },
+    '$route' (to, from){
+      // 判断下个页面是否是产品详情页面，需要隐藏底部菜单栏
+      if(to.name=== 'Product' || to.name=== 'Search'){
+        this.footer_show = false
+      }
+      // 从产品页面回到任意页面
+      if(from.name=== 'Product' || from.name=== 'Search'){
+        this.footer_show = true
+      }
     }
   },
   methods:{
@@ -117,6 +125,16 @@ export default {
   transition: all .3s;
 }
 
+.footerTransition-enter,.footerTransition-leave-to{
+  transform: translateY(100%);
+}
+.footerTransition-enter-to,.footerTransition-leave{
+  transform: translateY(0);
+}
+.footerTransition-enter-active,.footerTransition-leave-active{
+  transition: all 0.3s;
+}
+
 .icon{
   font-family: 'iconfont';
   font-style: normal;
@@ -158,7 +176,7 @@ body{
   left: 0;
   bottom: 0;
   right: 0;
-
+  overflow: hidden;
 }
 .footer{
   height: 1.43rem;

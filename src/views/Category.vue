@@ -1,6 +1,8 @@
 <template>
 	<div class="category">
-		<back-header :title='title'></back-header>
+		
+		<back-header :title='title' ref='backHeader'></back-header>
+		
 		<div class="category-content">
 			<div class="category-left" ref='leftView'>
 				<ul>
@@ -458,7 +460,8 @@ import BackHeader from '@/components/BackHeader'
 				title:'分类',
 				menuLiIndex:0,
 				categoryMenuList:["新品","手机","电视","电脑","家电","路由","智能","儿童","电源","耳机","音箱","礼品","生活","服务","米粉卡","零售店"],
-				offset:[]
+				offset:[],
+				header_show:false,
 			}
 		},
 		components:{
@@ -486,6 +489,7 @@ import BackHeader from '@/components/BackHeader'
 			jumpTo(index){
 				this.menuLiIndex = index;
 				this.$refs.rightView.scrollTop = this.offset[index];
+				//this.$refs.backHeader.showMe();
 			},
 			indexOf(arr, num){
 				for(let i=0;i<arr.length;i++){
@@ -495,6 +499,17 @@ import BackHeader from '@/components/BackHeader'
 				}
 				return -1;
 			}
+		},
+		beforeRouteEnter(to, from, next){
+			next(vm=>{
+				vm.$refs.backHeader.showMe();
+			});
+		},
+		beforeRouteLeave(to, from, next){
+			this.$refs.backHeader.hideMe();
+			
+			
+			next();
 		},
 		mounted(){
 
@@ -506,8 +521,9 @@ import BackHeader from '@/components/BackHeader'
 	}
 </script>
 <style scoped>
-	
-
+.category{
+	background: #fff;
+}
 .category-content{
 	position: absolute;
 	top: 1.5rem;
