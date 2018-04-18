@@ -57,7 +57,7 @@
 		</div>
 		<div class="add-to-cart">
 			<div class="left-icon">
-				<p class="home-i" @click='go("/home")'>
+				<p class="home-i" @click='go("/")'>
 					<i class="icon">&#xe626;</i>
 					<span>首页</span>
 				</p>
@@ -79,6 +79,7 @@ import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import Parabola from '@/util/parabola'
 	export default{
+		name:'Product',
 		data(){
 			return{
 				count:0,
@@ -139,6 +140,16 @@ import Parabola from '@/util/parabola'
 		          	
 		          	// 购物车商品加1
 		          	_this.count++;
+
+		          	var item = {
+						id:10001,
+						name:'小米Note3 人脸解锁',
+						href:'//cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/7e98be403a5f4277adba84acaecb9c76.jpg?bg=6D96C7',
+						price:1999,
+						count:1
+					}
+					_this.$store.commit('addOne',item);
+		          	console.log(_this.$store.state.shopcart.list);
 		          }
 		        });
 

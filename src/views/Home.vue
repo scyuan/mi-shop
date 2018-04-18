@@ -60,7 +60,7 @@
 			</div>
 			
 			<div class="tj clearfix">
-				<div class="tj-items" v-for='(item,index) in tj_items' :class="{'left':index%2===0,'right':index%2!==0}">
+				<div class="tj-items" v-for='(item,index) in tj_items' :class="{'left':index%2===0,'right':index%2!==0}" @click='$router.push({path:"/product/1001"})'>
 					<img :src="item.src" alt="">
 					<p class="title">{{item.title}}</p>
 					<p class="con">{{item.con}}</p>
@@ -75,6 +75,7 @@
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 	export default{
+		name:'Home',
 		data(){
 			return{
 				navActiveIndex:0,
@@ -197,7 +198,8 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 				swiperOption: {
 				  loop:true,
 		          autoplay:{
-		          	stopOnLastSlide:false
+		          	stopOnLastSlide:false,
+		          	delay:5000
 		          },
 		          // 最左最右禁止滑动
 		          resistanceRatio : 0,
@@ -223,6 +225,9 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 		},
 		components:{
 			swiper, swiperSlide
+		},
+		activated(){
+			this.swiper.autoplay.start();
 		},
 		computed: {
 	      swiper() {

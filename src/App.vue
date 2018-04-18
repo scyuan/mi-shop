@@ -3,7 +3,9 @@
     
     <div class="app-content">
       <transition :name='transitionName'>
-        <router-view></router-view>
+        <keep-alive exclude='backheader' include='Category,Home,Personal,Product,Search,ShopCart' >  
+          <router-view v-on:openbottom='openbottom()'></router-view>
+        </keep-alive>
       </transition>
 
       <transition name='footerTransition'>
@@ -63,6 +65,7 @@ export default {
         this.transitionName = 'slide-right'
       }
     },
+
     '$route' (to, from){
       // 刚进来初始化 bottom菜单栏高亮
       switch(to.name){
@@ -90,12 +93,29 @@ export default {
         this.footer_show = true
         this.transitionName = 'slide-right'
       }
+
+      // 进入购物车栏
+      if(to.name ==='ShopCart'){
+        // 判断购物车是否为空
+        if(this.$store.state.shopcart.list.length !== 0){
+          // 隐藏底部菜单栏
+          this.footer_show = false
+        }
+      }
+
+      // 退出购物车
+      if(from.name === 'ShopCart' && to.name !== 'Search' && to.name !== 'Product'){
+        this.footer_show = true
+      }
     }
   },
   methods:{
     open(index){
       this.footerMenuIndex = index;
       this.$router.push({path:this.footerMenuList[index].path});
+    },
+    openbottom(){
+      this.footer_show = true
     }
   }
 }
@@ -111,11 +131,11 @@ export default {
 }
 @font-face {
   font-family: 'iconfont';  /* project id 624613 */
-  src: url('//at.alicdn.com/t/font_624613_ifg9lrsedwunb3xr.eot');
-  src: url('//at.alicdn.com/t/font_624613_ifg9lrsedwunb3xr.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_624613_ifg9lrsedwunb3xr.woff') format('woff'),
-  url('//at.alicdn.com/t/font_624613_ifg9lrsedwunb3xr.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_624613_ifg9lrsedwunb3xr.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_624613_96ws9nsthmxfajor.eot');
+  src: url('//at.alicdn.com/t/font_624613_96ws9nsthmxfajor.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_624613_96ws9nsthmxfajor.woff') format('woff'),
+  url('//at.alicdn.com/t/font_624613_96ws9nsthmxfajor.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_624613_96ws9nsthmxfajor.svg#iconfont') format('svg');
 }
 .slide-left-leave-to{
   transform: translateX(-100%);

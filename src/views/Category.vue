@@ -2,7 +2,22 @@
 	<div class="category">
 		
 		<back-header :title='title' ref='backHeader'></back-header>
-		
+		<transition name='loading-fade'>
+			<div class="modal category-content" v-if='loading'>
+				<div class="loading">
+					<div class="loadEffect">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				</div>
+			</div>
+		</transition>
 		<div class="category-content">
 			<div class="category-left" ref='leftView'>
 				<ul>
@@ -13,439 +28,15 @@
 				<div class="category-box">
 					<img src="https://ws4.sinaimg.cn/large/006tKfTcly1fqaqvftbwvj30dw05kq2w.jpg" alt="">
 				</div>
-				<div class="category-box">
-					<p class="box-title"><span>手机</span></p>
+
+				<div class="category-box" v-for='item in category_detail'>
+					<p class="box-title"><span>{{item.title}}</span></p>
 					<div class="box-content clearfix">
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-					</div>
-				</div>
-				<div class="category-box">
-					<p class="box-title"><span>电视</span></p>
-					<div class="box-content clearfix">
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-					</div>
-				</div>
-				<div class="category-box">
-					<p class="box-title"><span>电脑</span></p>
-					<div class="box-content clearfix">
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-					</div>
-				</div>
-				<div class="category-box">
-					<p class="box-title"><span>家电</span></p>
-					<div class="box-content clearfix">
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-					</div>
-				</div>
-				<div class="category-box">
-					<p class="box-title"><span>路由</span></p>
-					<div class="box-content clearfix">
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-					</div>
-				</div>
-				<div class="category-box">
-					<p class="box-title"><span>智能</span></p>
-					<div class="box-content clearfix">
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-					</div>
-				</div>
-				<div class="category-box">
-					<p class="box-title"><span>儿童</span></p>
-					<div class="box-content clearfix">
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-					</div>
-				</div>
-				<div class="category-box">
-					<p class="box-title"><span>电源</span></p>
-					<div class="box-content clearfix">
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-					</div>
-				</div>
-				<div class="category-box">
-					<p class="box-title"><span>耳机</span></p>
-					<div class="box-content clearfix">
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-					</div>
-				</div>
-				<div class="category-box">
-					<p class="box-title"><span>音箱</span></p>
-					<div class="box-content clearfix">
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-					</div>
-				</div>
-				<div class="category-box">
-					<p class="box-title"><span>礼品</span></p>
-					<div class="box-content clearfix">
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-					</div>
-				</div>
-				<div class="category-box">
-					<p class="box-title"><span>生活</span></p>
-					<div class="box-content clearfix">
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-					</div>
-				</div>
-				<div class="category-box">
-					<p class="box-title"><span>服务</span></p>
-					<div class="box-content clearfix">
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-					</div>
-				</div>
-				<div class="category-box">
-					<p class="box-title"><span>礼品卡</span></p>
-					<div class="box-content clearfix">
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-					</div>
-				</div>
-				<div class="category-box">
-					<p class="box-title"><span>零售店</span></p>
-					<div class="box-content clearfix">
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
-						<div class="box-item">
-							<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/img_0505.png" alt="">
-							<p>小米5s</p>
-						</div>
+						<div class="box-item" v-for='p in item.data'>
+							<img :src="p.src" alt="">
+							<p>{{p.name}}</p>
+						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -455,13 +46,16 @@
 <script>
 import BackHeader from '@/components/BackHeader'
 	export default{
+		name:'Category',
 		data(){
 			return{
 				title:'分类',
 				menuLiIndex:0,
-				categoryMenuList:["新品","手机","电视","电脑","家电","路由","智能","儿童","电源","耳机","音箱","礼品","生活","服务","米粉卡","零售店"],
+				categoryMenuList:[],
+				category_detail:[],
 				offset:[],
 				header_show:false,
+				loading:false,
 			}
 		},
 		components:{
@@ -498,18 +92,32 @@ import BackHeader from '@/components/BackHeader'
 					}
 				}
 				return -1;
+			},
+			getData(){
+				this.loading = true;
+				this.$http.get('https://www.easy-mock.com/mock/5ad6eb960a6d0e1000b57d01/mi-shop/category_list').then(res=>{
+					this.categoryMenuList = res.data.data.category;
+					this.category_detail = res.data.data.content;
+					this.loading = false;
+					console.log(res.data);
+				}).catch(err=>{
+					console.log(err);
+				})
 			}
 		},
 		beforeRouteEnter(to, from, next){
 			next(vm=>{
 				vm.$refs.backHeader.showMe();
+
 			});
 		},
 		beforeRouteLeave(to, from, next){
 			this.$refs.backHeader.hideMe();
-			
-			
 			next();
+		},
+		created(){
+			// 获取数据
+			this.getData();
 		},
 		mounted(){
 
@@ -521,6 +129,16 @@ import BackHeader from '@/components/BackHeader'
 	}
 </script>
 <style scoped>
+.loading-fade-enter,.loading-fade-leave-to{
+	opacity: 0;
+}
+.loading-fade-enter-to,.loading-fade-leave{
+	opacity: 1;
+}
+.loading-fade-enter-active,.loading-fade-leave-active{
+	transition: all 0.3s;
+}
+
 .category{
 	background: #fff;
 }
@@ -608,5 +226,80 @@ import BackHeader from '@/components/BackHeader'
 .menuLiActive span{
 	color: #ea625b;
 	font-size: 0.48rem;
+}
+.modal{
+	background: rgba(0,0,0,0.5);
+	z-index: 10;
+	top: 0;
+}
+.loading{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	width: 50px;
+	height: 50px;
+}
+.loadEffect{ 
+	width: 50px; 
+	height: 50px; 
+	position: relative; 
+} 
+.loadEffect span{ 
+	display: inline-block; 
+	width: 8px; 
+	height: 8px; 
+	border-radius: 50%; 
+	background: #fff; 
+	position: absolute; 
+	-webkit-animation: 
+	load 1.04s ease infinite; 
+} 
+@-webkit-keyframes load{ 
+	0%{ opacity: 1; } 100%{ opacity: 0.1; } 
+} 
+.loadEffect span:nth-child(1){ 
+	left: 0; 
+	top: 50%; 
+	margin-top:-3px; 
+	-webkit-animation-delay:0.13s; 
+} 
+.loadEffect span:nth-child(2){ 
+	left: 7px; 
+	top: 7px; 
+	-webkit-animation-delay:0.26s; 
+} 
+.loadEffect span:nth-child(3){ 
+	left: 50%; 
+	top: 0;
+	margin-left: -3px; 
+	-webkit-animation-delay:0.39s; 
+} 
+.loadEffect span:nth-child(4){ 
+	top: 7px; 
+	right:7px; 
+	-webkit-animation-delay:0.52s; 
+} 
+.loadEffect span:nth-child(5){ 
+	right: 0; 
+	top: 50%; 
+	margin-top:-3px; 
+	-webkit-animation-delay:0.65s; 
+} 
+.loadEffect span:nth-child(6){ 
+	right: 7px; 
+	bottom:7px; 
+	-webkit-animation-delay:0.78s; 
+} 
+.loadEffect span:nth-child(7){ 
+	bottom: 0; 
+	left: 50%; 
+	margin-left: -3px; 
+	-webkit-animation-delay:0.91s; 
+} 
+.loadEffect span:nth-child(8){ 
+	bottom: 7px; 
+	left: 7px; 
+	-webkit-animation-delay:1.04s; 
 }
 </style>
