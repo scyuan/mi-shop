@@ -30,7 +30,7 @@ export default {
     return{
       footer_show:true,
       footerMenuIndex:0,
-      transitionName:'slide-left',
+      transitionName:'slide-right',
       footerMenuList:[
         {
           text:'首页',
@@ -64,13 +64,31 @@ export default {
       }
     },
     '$route' (to, from){
+      // 刚进来初始化 bottom菜单栏高亮
+      switch(to.name){
+        case 'Home':
+          this.footerMenuIndex = 0;
+          break;
+        case 'Category':
+          this.footerMenuIndex = 1;
+          break;
+        case 'ShopCart':
+          this.footerMenuIndex = 2;
+          break;
+        case 'Personal':
+          this.footerMenuIndex = 3;
+          break;
+      }
+
       // 判断下个页面是否是产品详情页面，需要隐藏底部菜单栏
       if(to.name=== 'Product' || to.name=== 'Search'){
         this.footer_show = false
+        this.transitionName = 'slide-left'
       }
       // 从产品页面回到任意页面
       if(from.name=== 'Product' || from.name=== 'Search'){
         this.footer_show = true
+        this.transitionName = 'slide-right'
       }
     }
   },
@@ -158,7 +176,7 @@ body{
   height: 100%;
   background: #fff;
 }
-.white-bullet-active{
+.swiper-container-horizontal > .swiper-pagination-bullets .white-bullet-active{
   background: #fff;
   opacity: 1;
 }

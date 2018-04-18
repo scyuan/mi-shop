@@ -61,12 +61,14 @@
 					<i class="icon">&#xe626;</i>
 					<span>首页</span>
 				</p>
-				<p class="cart-i" @click='go("/shopcart")'>
+				<p class="cart-i" @click='go("/shopcart")' ref='cart'>
 					<i class="icon">&#xe899;</i>
 					<span>购物车</span>
+					<span class="count" v-show='count > 0'>{{count}}</span>
 				</p>
 			</div>
-			<div class="add">
+			<div class="add" @click='addToCart()'>
+				<div class="ball" ref='ball'></div>
 				加入购物车
 			</div>
 		</div>
@@ -75,9 +77,11 @@
 <script>
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import Parabola from '@/util/parabola'
 	export default{
 		data(){
 			return{
+				count:0,
 				banner_list:[
 					{
 						src:'//cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/7e98be403a5f4277adba84acaecb9c76.jpg?bg=6D96C7'
@@ -93,6 +97,8 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 					}
 				],
 				swiperOption: {
+				  // 最左最右禁止滑动
+		          resistanceRatio : 0,
 		          pagination:{
 		          	el:'.swiper-pagination',
 		          	clickable:true,
@@ -104,10 +110,46 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 		methods:{
 			go(href){
 				this.$router.push({path:href});
+			},
+			addToCart(){
+
+				var _this = this;
+				this.$refs.ball.style.display = 'block';
+				var parabola = new Parabola({
+		          start: {
+		            left: _this.$refs.ball.offsetLeft,
+		            top: _this.$refs.ball.offsetTop
+		          },
+		          end: {
+		            left: _this.$refs.cart.offsetLeft,
+		            top: _this.$refs.cart.offsetTop
+		          },
+		          duration: 300,
+		          // 每帧动画 移动小球 通过transform
+		          onStep (pos) {
+		            var position = 'translate3d('+(pos.x)+'px,'+(pos.y)+'px, 0px)'
+		           	
+
+		            _this.$refs.ball.style.webKitTransform = position
+		            _this.$refs.ball.style.transform = position
+		          },
+		          // 动画结束回调
+		          onFinish (pos) {
+		            _this.$refs.ball.style.display = 'none'
+		          	
+		          	// 购物车商品加1
+		          	_this.count++;
+		          }
+		        });
+
+        		parabola.start();
 			}
 		},
 		components:{
 			swiper, swiperSlide
+		},
+		mounted(){
+
 		}
 	}
 </script>
@@ -243,6 +285,16 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 	text-align: center;
 	line-height: 1.44rem;
 }
+.ball{
+	position: absolute;
+	top: 30%;
+	left: 65%;
+	width: 0.533333rem;
+	height: 0.533333rem;
+	border-radius: 50%;
+	background: rgb(255,74,0);
+	display: none;
+}
 .left-icon p:nth-child(1){
 	border-right: 1px solid #eee;
 }
@@ -271,5 +323,17 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 	text-align: center;
 	line-height: 0.853333rem;
 	z-index: 10;
+}
+.cart-i{
+	position: relative;
+}
+.count{
+	position: absolute;
+	right: 0.266667rem;
+	top: 0;
+	padding:0 0.133333rem;
+	background: rgb(255,74,0);
+	color: #fff;
+	border-radius: 0.8rem;
 }
 </style>

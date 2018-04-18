@@ -12,7 +12,7 @@
 					</div>
 				</div>
 				<div class="header-search-right">
-					<i class="icon">&#xe64f;</i>
+					<i class="icon" @click='$router.push({path:"/me"})'>&#xe64f;</i>
 				</div>
 			</div>
 			<div class="nav" ref='nav'>
@@ -199,6 +199,8 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 		          autoplay:{
 		          	stopOnLastSlide:false
 		          },
+		          // 最左最右禁止滑动
+		          resistanceRatio : 0,
 		          pagination:{
 		          	el:'.swiper-pagination',
 		          	clickable:true,
