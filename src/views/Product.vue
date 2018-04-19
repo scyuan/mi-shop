@@ -46,14 +46,7 @@
 		</div>
 
 		<div class="product-bg">
-			<img src="//i8.mifile.cn/v1/a1/f6b42e48-8af9-c1c1-5df2-eb1973499aae.jpg?w=1080&h=1735&s=192.6" alt="">
-			<img src="//i8.mifile.cn/v1/a1/eb3d5e39-000d-bfb9-acce-e346876cfa94.jpg?w=1080&h=1387&s=171.9" alt="">
-			<img src="//i8.mifile.cn/v1/a1/5bb89342-dce9-82d4-59c7-a322376fc1a8.jpg?w=1080&h=1735&s=164" alt="">
-			<img src="//i8.mifile.cn/v1/a1/8ba93f97-a966-088d-7aa0-21f3a50f08ea.jpg?w=1080&h=1201&s=120.4" alt="">
-			<img src="//i8.mifile.cn/v1/a1/1f2ccbc5-8a7c-39ab-9819-5aec14d533b5.jpg?w=1080&h=1445&s=150.1" alt="">
-			<img src="//i8.mifile.cn/v1/a1/9356b62d-e15b-a208-72f0-709fe24f6c48.jpg?w=1080&h=996&s=193.1" alt="">
-			<img src="//i8.mifile.cn/v1/a1/a5b0856b-888b-dc1b-a35c-2981dd0e35d3.jpg?w=1080&h=1445&s=169" alt="">
-			<img src="//i8.mifile.cn/v1/a1/f8e52783-b598-2dfd-7057-52c285515119.jpg?w=1080&h=1735&s=191.4" alt="">
+			<img v-for='img in img_list' v-lazy="img" alt="">
 		</div>
 		<div class="add-to-cart">
 			<div class="left-icon">
@@ -83,6 +76,16 @@ import Parabola from '@/util/parabola'
 		data(){
 			return{
 				count:0,
+				img_list:[
+					"//i8.mifile.cn/v1/a1/f6b42e48-8af9-c1c1-5df2-eb1973499aae.jpg?w=1080&h=1735&s=192.6",
+					"//i8.mifile.cn/v1/a1/eb3d5e39-000d-bfb9-acce-e346876cfa94.jpg?w=1080&h=1387&s=171.9",
+					"//i8.mifile.cn/v1/a1/5bb89342-dce9-82d4-59c7-a322376fc1a8.jpg?w=1080&h=1735&s=164",
+					"//i8.mifile.cn/v1/a1/8ba93f97-a966-088d-7aa0-21f3a50f08ea.jpg?w=1080&h=1201&s=120.4",
+					"//i8.mifile.cn/v1/a1/1f2ccbc5-8a7c-39ab-9819-5aec14d533b5.jpg?w=1080&h=1445&s=150.1",
+					"//i8.mifile.cn/v1/a1/9356b62d-e15b-a208-72f0-709fe24f6c48.jpg?w=1080&h=996&s=193.1",
+					"//i8.mifile.cn/v1/a1/a5b0856b-888b-dc1b-a35c-2981dd0e35d3.jpg?w=1080&h=1445&s=169",
+					"//i8.mifile.cn/v1/a1/f8e52783-b598-2dfd-7057-52c285515119.jpg?w=1080&h=1735&s=191.4"
+				],
 				banner_list:[
 					{
 						src:'//cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/7e98be403a5f4277adba84acaecb9c76.jpg?bg=6D96C7'
@@ -268,6 +271,7 @@ import Parabola from '@/util/parabola'
 	width: 100%;
 	height: auto;
 	vertical-align: top;
+	transition: all 0.3s;
 }
 .add-to-cart{
 	position: fixed;

@@ -1,9 +1,13 @@
 <template>
   <div>
-    
-    <div class="app-content">
+    <div class="app-content"> 
+      
+      <div :class="progress" class="progress"></div>
+
+      <back-header :title='title' ref='backheader'></back-header>
+
       <transition :name='transitionName'>
-        <keep-alive exclude='backheader' include='Category,Home,Personal,Product,Search,ShopCart' >  
+        <keep-alive include='Category,Home,Personal,Product,Search,ShopCart' >  
           <router-view v-on:openbottom='openbottom()'></router-view>
         </keep-alive>
       </transition>
@@ -23,13 +27,19 @@
 </template>
 
 <script>
+import BackHeader from '@/components/BackHeader'
+
 import Rem from '@/assets/js/rem';
 
 new Rem();
 export default {
   name: 'App',
+  components:{
+    BackHeader
+  },
   data(){
     return{
+      title:'',
       footer_show:true,
       footerMenuIndex:0,
       transitionName:'slide-right',
@@ -55,6 +65,11 @@ export default {
           path:'/me'
         },
       ]
+    }
+  },
+  computed:{
+    progress(){
+      return this.$store.state.loading.status;
     }
   },
   watch:{
@@ -96,6 +111,7 @@ export default {
 
       // 进入购物车栏
       if(to.name ==='ShopCart'){
+
         // 判断购物车是否为空
         if(this.$store.state.shopcart.list.length !== 0){
           // 隐藏底部菜单栏
@@ -103,9 +119,25 @@ export default {
         }
       }
 
+
       // 退出购物车
       if(from.name === 'ShopCart' && to.name !== 'Search' && to.name !== 'Product'){
-        this.footer_show = true
+        this.footer_show = true;
+      }
+
+
+      /*
+        控制头部backheader
+      */
+      if(to.name === 'Category' || to.name === 'ShopCart'){
+        if(to.name === 'Category')
+          this.title = "分类";
+        else
+          this.title = "购物车";
+        this.$refs.backheader.showMe();
+      }
+      if(to.name !== 'Category' && to.name !=='ShopCart'){
+        this.$refs.backheader.hideMe();
       }
     }
   },
@@ -170,6 +202,16 @@ export default {
   transform: translateY(0);
 }
 .footerTransition-enter-active,.footerTransition-leave-active{
+  transition: all 0.3s;
+}
+
+.progress-slide-enter,.progress-slide-leave-to{
+  transform: translateY(-100%);
+}
+.progress-slide-enter-to,.progress-slide-leave{
+  transform: translateY(0);
+}
+.progress-slide-enter-active,.progress-slide-leave-avtive{
   transition: all 0.3s;
 }
 
@@ -247,5 +289,21 @@ body{
 }
 .footer span.menu_active,.footer span.menu_active i{
   color: #ea625b;
+}
+.progress{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: rgb(255, 202, 43);
+  z-index: 1000;
+  transition: all 0.3s;
+}
+.loading{
+  width: 100%;
+}
+.hide{
+  display: none;
 }
 </style>

@@ -11,6 +11,7 @@
 </template>
 <script>
 	export default{
+		name:'backheader',
 		props:["title"],
 		data(){
 			return{
@@ -24,8 +25,7 @@
 			},
 			hideMe(){
 			
-				setTimeout(function(){this.show = false;},10);
-				
+				this.show = false;
 			}
 		}
 	}
@@ -39,6 +39,10 @@
 }
 .header-slide-enter-active,.header-slide-leave-active{
 	transition: all .5s;
+}
+.backheader{
+	position: relative;
+	z-index: 100;
 }
 .category-title{
 	height: 1.5rem;

@@ -1,7 +1,7 @@
 <template>
 	<div class="category">
 		
-		<back-header :title='title' ref='backHeader'></back-header>
+		<!-- <back-header :title='title' ref='backHeader'></back-header> -->
 		<transition name='loading-fade'>
 			<div class="modal category-content" v-if='loading'>
 				<div class="loading">
@@ -99,31 +99,38 @@ import BackHeader from '@/components/BackHeader'
 					this.categoryMenuList = res.data.data.category;
 					this.category_detail = res.data.data.content;
 					this.loading = false;
+					// 获取到数据后 计算offset
+					this.getOffset();
 					console.log(res.data);
 				}).catch(err=>{
 					console.log(err);
 				})
+			},
+			getOffset(){
+				this.$nextTick(()=>{
+					var boxs = this.$refs.rightView.getElementsByClassName('category-box');
+					for(let i=0;i<boxs.length;i++){
+						this.offset.push(boxs[i].offsetTop);
+					}
+				})	
 			}
 		},
-		beforeRouteEnter(to, from, next){
-			next(vm=>{
-				vm.$refs.backHeader.showMe();
+		// beforeRouteEnter(to, from, next){
+		// 	next(vm=>{
+		// 		vm.$refs.backHeader.showMe();
 
-			});
-		},
-		beforeRouteLeave(to, from, next){
-			this.$refs.backHeader.hideMe();
-			next();
-		},
+		// 	});
+		// },
+		// beforeRouteLeave(to, from, next){
+		// 	this.$refs.backHeader.hideMe();
+		// 	next();
+		// },
 		created(){
 			// 获取数据
 			this.getData();
 		},
 		mounted(){
-
-			var boxs = this.$refs.rightView.getElementsByClassName('category-box');
-			for(let i=0;i<boxs.length;i++)
-				this.offset.push(boxs[i].offsetTop);
+			
 		}
 
 	}

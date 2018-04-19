@@ -3,6 +3,18 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex);
 
+const loading = {
+	state:{
+		status:'',
+	},
+	
+	mutations:{
+		routerstatus(state,newStatus){
+			state.status = newStatus;
+		}
+	}
+}
+
 const shopcart = {
 	state:{
 		list:[]
@@ -60,6 +72,6 @@ const shopcart = {
 
 export default new Vuex.Store({
 	modules:{
-		shopcart
+		shopcart,loading
 	}
 })

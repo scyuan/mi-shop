@@ -1,7 +1,7 @@
 <template>
 	<div class="cart">
 
-		<back-header :title='title' ref='backHeader'></back-header>
+		<!-- <back-header :title='title' ref='backHeader'></back-header> -->
 
 		<div class="cart-content">
 			
@@ -139,16 +139,15 @@ import BackHeader from '@/components/BackHeader'
 				this.$emit('openbottom');
 			}
 		},
-		beforeRouteEnter(to, from, next){
-			next(vm=>{
-				vm.$refs.backHeader.showMe();
-			});
-
-		},
-		beforeRouteLeave(to, from, next){
-			this.$refs.backHeader.hideMe();
-			next();
-		},
+		// beforeRouteEnter(to, from, next){
+		// 	next(vm=>{
+		// 		vm.$refs.backHeader.showMe();
+		// 	});
+		// },
+		// beforeRouteLeave(to, from, next){
+		// 	this.$refs.backHeader.hideMe();
+		// 	next();
+		// },
 	}
 </script>
 <style scoped>
