@@ -75,7 +75,6 @@ import Parabola from '@/util/parabola'
 		name:'Product',
 		data(){
 			return{
-				count:0,
 				img_list:[
 					"//i8.mifile.cn/v1/a1/f6b42e48-8af9-c1c1-5df2-eb1973499aae.jpg?w=1080&h=1735&s=192.6",
 					"//i8.mifile.cn/v1/a1/eb3d5e39-000d-bfb9-acce-e346876cfa94.jpg?w=1080&h=1387&s=171.9",
@@ -111,6 +110,15 @@ import Parabola from '@/util/parabola'
 		        }
 			}
 		},
+		computed:{
+			count(){
+				var sum = 0;
+				for(let i=0;i<this.$store.state.shopcart.list.length;i++){
+					sum = sum + this.$store.state.shopcart.list[i].count;
+				}
+				return sum;
+			}
+		},
 		methods:{
 			go(href){
 				this.$router.push({path:href});
@@ -140,9 +148,6 @@ import Parabola from '@/util/parabola'
 		          // 动画结束回调
 		          onFinish (pos) {
 		            _this.$refs.ball.style.display = 'none'
-		          	
-		          	// 购物车商品加1
-		          	_this.count++;
 
 		          	var item = {
 						id:10001,
@@ -152,7 +157,6 @@ import Parabola from '@/util/parabola'
 						count:1
 					}
 					_this.$store.commit('addOne',item);
-		          	console.log(_this.$store.state.shopcart.list);
 		          }
 		        });
 
@@ -309,6 +313,7 @@ import Parabola from '@/util/parabola'
 	border-radius: 50%;
 	background: rgb(255,74,0);
 	display: none;
+	-webkit-tap-highlight-color:transparent;
 }
 .left-icon p:nth-child(1){
 	border-right: 1px solid #eee;

@@ -14,8 +14,8 @@
 
       <transition name='footerTransition'>
         <footer class="footer" v-show='footer_show'>
-          <span v-for='(item, index) in footerMenuList' :class="{'menu_active':index === footerMenuIndex}">
-            <i class="icon" v-html='item.icon' @click='open(index)'></i>
+          <span v-for='(item, index) in footerMenuList' @click='open(index)' :class="{'menu_active':index === footerMenuIndex}">
+            <i class="icon" v-html='item.icon'></i>
             {{item.text}}
           </span>
         </footer>
@@ -276,6 +276,7 @@ body{
   flex-direction: column;
   font-size: 0.32rem;
   color: #727272;
+  -webkit-tap-highlight-color:transparent;
 }
 .footer span i{
   font-size: 0.533333rem;

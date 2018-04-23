@@ -26,42 +26,36 @@
 		<div class="scroll-box">
 			<swiper :options="swiperOption" ref="mySwiper">
 			    <!-- slides -->
-			    <swiper-slide v-for='item in banner_list'><img :src="item.src" alt="" @click='detail(item.href)'></swiper-slide>
+			    <swiper-slide v-for='item in banner_list' >
+			    	<img :data-src="item.src" class="swiper-lazy" @click='$router.push({path:"/product/1001"})'>
+            		<div class="swiper-lazy-preloader"></div>
+			    </swiper-slide>
 			    
 			    <!-- Optional controls -->
 			    <div class="swiper-pagination"  slot="pagination"></div>
 			</swiper>
 
 			<div class="nav-mid">
-				<a href="javascript:;"><img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/2018011022292984819.png" alt=""></a>
-				<a href="javascript:;"><img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/2018011022292372054.png" alt=""></a>
-				<a href="javascript:;"><img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/2018011022291629252.png" alt=""></a>
-				<a href="javascript:;"><img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/2018011022290460400.png" alt=""></a>
+				<a href="javascript:;" v-for ='img in nav_mid'><img v-lazy="img" alt=""></a>
 			</div>
 
 			<div class="zhijiang clearfix">
 				<div class="zj-left">
-					<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/2018011114551289342.png" alt="">
+					<img v-lazy="zhijiang[0]" alt="">
 				</div>
 				<div class="zj-right">
-					<img src="http://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/e2ad0dbf777fda097e55cea9ce716e33.jpg?thumb=1&w=358&h=252" alt="">
-					<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/2018011114550596671.png" alt="">
+					<img v-lazy="zhijiang[1]" alt="">
+					<img v-lazy="zhijiang[2]" alt="">
 				</div>
 				
 			</div>
-			<div class="tj">
-				<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/a589d24e74c4d96191dd46635054e804.jpg" alt="">
-			</div>
-			<div class="tj">
-				<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/2018011115034174111.png" alt="">
-			</div>
-			<div class="tj">
-				<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/2018011115033089933.png" alt="">
+			<div class="tj" v-for='img in tj_imgs'>
+				<img v-lazy='img' alt="">
 			</div>
 			
 			<div class="tj clearfix">
 				<div class="tj-items" v-for='(item,index) in tj_items' :class="{'left':index%2===0,'right':index%2!==0}" @click='$router.push({path:"/product/1001"})'>
-					<img :src="item.src" alt="">
+					<img v-lazy="item.src">
 					<p class="title">{{item.title}}</p>
 					<p class="con">{{item.con}}</p>
 					<p class="price">￥{{item.money}}</p>
@@ -78,6 +72,23 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 		name:'Home',
 		data(){
 			return{
+				nav_mid:[
+					"http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/2018011022292984819.png",
+					"http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/2018011022292372054.png",
+					"http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/2018011022291629252.png",
+					"http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/2018011022290460400.png"
+				],
+				zhijiang:[
+					"http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/2018011114551289342.png",
+					"http://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/e2ad0dbf777fda097e55cea9ce716e33.jpg?thumb=1&w=358&h=252",
+					"http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/2018011114550596671.png"
+
+				],
+				tj_imgs:[
+					"http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/a589d24e74c4d96191dd46635054e804.jpg",
+					"http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/2018011115034174111.png",
+					"http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/2018011115033089933.png"
+				],
 				navActiveIndex:0,
 				tj_items:[
 					 {
@@ -196,10 +207,14 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 		          }
 		        ],
 				swiperOption: {
+				  lazy: {
+				    loadPrevNext: true,
+				  },
 				  loop:true,
 		          autoplay:{
 		          	stopOnLastSlide:false,
-		          	delay:5000
+		          	delay:3000,
+		          	disableOnInteraction:false
 		          },
 		          // 最左最右禁止滑动
 		          resistanceRatio : 0,
@@ -207,7 +222,8 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 		          	el:'.swiper-pagination',
 		          	clickable:true,
 		          	bulletActiveClass: 'white-bullet-active',
-		          }
+		          },
+				  
 		        }
 			}
 		},
@@ -329,6 +345,7 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
 .nav-mid{
 	display: flex;
+	background: #fff;
 }
 .nav-mid a{
 	flex: 1;
@@ -336,6 +353,7 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 .nav-mid a img{
 	height: auto;
 	width: 100%;
+	vertical-align: top;
 }
 .zj-left{
 	float: left;
@@ -358,11 +376,13 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
 .tj{
 	margin-top: 0.16rem;
+	background: #fff;
 }
 .tj img{
 	width: 100%;
 	height: auto;
 	vertical-align: middle;
+
 }
 .tj-items{
 	width: 50%;
