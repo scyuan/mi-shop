@@ -54,14 +54,14 @@
 					<i class="icon">&#xe626;</i>
 					<span>首页</span>
 				</p>
-				<p class="cart-i" @click='go("/shopcart")' ref='cart'>
+				<p class="cart-i" @click='go("/shopcart")' ref='cart' id='cart'>
 					<i class="icon">&#xe899;</i>
 					<span>购物车</span>
 					<span class="count" v-show='count > 0'>{{count}}</span>
 				</p>
 			</div>
 			<div class="add" @click='addToCart()'>
-				<div class="ball" ref='ball'></div>
+				<div class="ball" ref='ball' id='ball'></div>
 				加入购物车
 			</div>
 		</div>
@@ -71,6 +71,7 @@
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import Parabola from '@/util/parabola'
+import $ from 'jquery'
 	export default{
 		name:'Product',
 		data(){
@@ -126,15 +127,20 @@ import Parabola from '@/util/parabola'
 			addToCart(){
 
 				var _this = this;
+				this.$refs.ball.style = '';
 				this.$refs.ball.style.display = 'block';
 				var parabola = new Parabola({
 		          start: {
-		            left: _this.$refs.ball.offsetLeft,
-		            top: _this.$refs.ball.offsetTop
+		            //left: _this.$refs.ball.offsetLeft,
+		            //top: _this.$refs.ball.offsetTop
+		            left:$('#ball').offset().left,
+		            top:$('#ball').offset().top
 		          },
 		          end: {
-		            left: _this.$refs.cart.offsetLeft,
-		            top: _this.$refs.cart.offsetTop
+		            //left: _this.$refs.cart.offsetLeft,
+		            //top: _this.$refs.cart.offsetTop
+		            left:$('#cart').offset().left+20,
+		            top:$('#cart').offset().top
 		          },
 		          duration: 300,
 		          // 每帧动画 移动小球 通过transform
@@ -313,7 +319,6 @@ import Parabola from '@/util/parabola'
 	border-radius: 50%;
 	background: rgb(255,74,0);
 	display: none;
-	-webkit-tap-highlight-color:transparent;
 }
 .left-icon p:nth-child(1){
 	border-right: 1px solid #eee;

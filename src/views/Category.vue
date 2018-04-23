@@ -45,6 +45,7 @@
 </template>
 <script>
 import BackHeader from '@/components/BackHeader'
+import $ from 'jquery'
 	export default{
 		name:'Category',
 		data(){
@@ -82,8 +83,11 @@ import BackHeader from '@/components/BackHeader'
 			},
 			jumpTo(index){
 				this.menuLiIndex = index;
-				this.$refs.rightView.scrollTop = this.offset[index];
+				//this.$refs.rightView.scrollTop = this.offset[index];
 				//this.$refs.backHeader.showMe();
+				$(this.$refs.rightView).animate({
+					scrollTop:this.offset[index]+'px'
+				})
 			},
 			indexOf(arr, num){
 				for(let i=0;i<arr.length;i++){

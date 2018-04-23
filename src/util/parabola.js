@@ -16,7 +16,7 @@ var Parabola = function(opts) {
     this.a = 0.01;
 	this.opts = opts;
     	
-    //console.log(this.opts);
+    console.log(this.opts);
 
     /*
 	  抛物线函数 y = a*X*X + b*X + c;
