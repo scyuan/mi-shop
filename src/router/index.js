@@ -6,6 +6,12 @@ const ShopCart = () => import ('@/views/ShopCart')
 const Personal = () => import ('@/views/Personal')
 const Product = () => import ('@/views/Product')
 const Search = () => import ('@/views/Search')
+// import Home from '@/views/Home'
+// import Category from '@/views/Category'
+// import ShopCart from '@/views/ShopCart'
+// import Personal from '@/views/Personal'
+// import Product from '@/views/Product'
+// import Search from '@/views/Search'
 Vue.use(Router)
 
 export default new Router({
