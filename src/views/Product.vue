@@ -1,52 +1,55 @@
 <template>
-	<div class="product">
-		<div class="product-img-wrap">
-			<i class="icon back" @click='$router.back()'>&#xe624;</i>
-			<swiper :options="swiperOption" ref="mySwiper">
-			    <!-- slides -->
-			    <swiper-slide v-for='item in banner_list'><img :src="item.src" alt=""></swiper-slide>
-			    
-			    <!-- Optional controls -->
-			    <div class="swiper-pagination"  slot="pagination"></div>
-			</swiper>
-		</div>
+	<div class="product" ref='wrapper'>
+		<div class="content">
+			<div class="product-img-wrap">
+				<i class="icon back" @click='$router.back()'>&#xe624;</i>
+				<swiper :options="swiperOption" ref="mySwiper">
+				    <!-- slides -->
+				    <swiper-slide v-for='item in banner_list'><img :src="item.src" alt=""></swiper-slide>
+				    
+				    <!-- Optional controls -->
+				    <div class="swiper-pagination"  slot="pagination"></div>
+				</swiper>
+			</div>
 
-		<div class="product-panel">
-			<p class="desc">小米Note3 人脸解锁</p>
-			<p class="activity"> 【手机品牌日限时特惠：128GB 今早10点限时特价秒杀。6+64GB直降200元，4+64GB直降100元。全系可享小米分期最高6期免息】</p>
-			<p class="more-desc"> 1600万美颜自拍 / 2倍变焦双摄，四轴光学防抖 / 5.5"护眼屏 / 超轻四曲面，7系铝金属边框。 </p>
-			<p class="price"><span class="price-now">￥1999</span><span class="price-before">￥2999</span><span class="price-activity">直降1000元</span></p>
-			<div class="line">
-				<span>促销</span>
-				<p><span class="z">赠品</span>赠吃到饱卡</p>
+			<div class="product-panel">
+				<p class="desc">小米Note3 人脸解锁</p>
+				<p class="activity"> 【手机品牌日限时特惠：128GB 今早10点限时特价秒杀。6+64GB直降200元，4+64GB直降100元。全系可享小米分期最高6期免息】</p>
+				<p class="more-desc"> 1600万美颜自拍 / 2倍变焦双摄，四轴光学防抖 / 5.5"护眼屏 / 超轻四曲面，7系铝金属边框。 </p>
+				<p class="price"><span class="price-now">￥1999</span><span class="price-before">￥2999</span><span class="price-activity">直降1000元</span></p>
+				<div class="line">
+					<span>促销</span>
+					<p><span class="z">赠品</span>赠吃到饱卡</p>
+					<i class="icon">&#xe64a;</i>
+				</div>
+			</div>
+			<div class="buy-panel">
+				<div class="line border">
+					<span>已选</span>
+					<p>小米Note3 4GB+64GB 黑色 x1</p>
+					<i class="icon">&#xe64a;</i>
+				</div>
+				<div class="line">
+					<span>送至</span>
+					<p>上海市 松江区 <span class="s">有现货</span></p>
+					<i class="icon">&#xe64a;</i>
+				</div>
+				<div class="line tuihuo">
+					
+					<p><i class="icon">&#xe602;</i>支持7天无理由退货</p>
+					
+				</div>
+			</div>
+			<div class="panel line">
+				<span>配件</span>
+				<p></p>
 				<i class="icon">&#xe64a;</i>
 			</div>
-		</div>
-		<div class="buy-panel">
-			<div class="line border">
-				<span>已选</span>
-				<p>小米Note3 4GB+64GB 黑色 x1</p>
-				<i class="icon">&#xe64a;</i>
-			</div>
-			<div class="line">
-				<span>送至</span>
-				<p>上海市 松江区 <span class="s">有现货</span></p>
-				<i class="icon">&#xe64a;</i>
-			</div>
-			<div class="line tuihuo">
-				
-				<p><i class="icon">&#xe602;</i>支持7天无理由退货</p>
-				
-			</div>
-		</div>
-		<div class="panel line">
-			<span>配件</span>
-			<p></p>
-			<i class="icon">&#xe64a;</i>
-		</div>
 
-		<div class="product-bg">
-			<img v-for='img in img_list' v-lazy="img" alt="">
+			<div class="product-bg">
+				<img v-for='img in img_list' v-lazy="img" alt="">
+			</div>
+			
 		</div>
 		<div class="add-to-cart">
 			<div class="left-icon">
@@ -72,6 +75,7 @@ import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import Parabola from '@/util/parabola'
 import $ from 'jquery'
+import BScroll from 'better-scroll'
 	export default{
 		name:'Product',
 		data(){
@@ -173,7 +177,16 @@ import $ from 'jquery'
 			swiper, swiperSlide
 		},
 		mounted(){
-
+			var _this = this;
+	    	this.$nextTick(() => {
+		    	if(!_this.scroll){
+					_this.scroll = new BScroll(_this.$refs.wrapper,{
+						click:true
+					})
+				}else{
+					_this.scroll.refresh();
+				}
+		    })
 		}
 	}
 </script>
