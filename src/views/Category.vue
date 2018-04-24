@@ -20,25 +20,28 @@
 		</transition>
 		<div class="category-content">
 			<div class="category-left" ref='leftView'>
-				<ul>
+				<ul class="content">
 					<li class="menuLi" v-for='(item, index ) in categoryMenuList' :class="{'menuLiActive':index === menuLiIndex}" @click='jumpTo(index)'><span>{{item}}</span></li>
 				</ul>
 			</div>
 			<div class="category-right" @scroll='scroll()' ref='rightView'>
-				<div class="category-box">
-					<img src="https://ws4.sinaimg.cn/large/006tKfTcly1fqaqvftbwvj30dw05kq2w.jpg" alt="">
-				</div>
+				<div class="content">
+					<div class="category-box">
+						<img src="https://ws4.sinaimg.cn/large/006tKfTcly1fqaqvftbwvj30dw05kq2w.jpg" alt="">
+					</div>
 
-				<div class="category-box" v-for='item in category_detail'>
-					<p class="box-title"><span>{{item.title}}</span></p>
-					<div class="box-content clearfix">
-						<div class="box-item" v-for='p in item.data'>
-							<img :src="p.src" alt="">
-							<p>{{p.name}}</p>
+					<div class="category-box" v-for='item in category_detail'>
+						<p class="box-title"><span>{{item.title}}</span></p>
+						<div class="box-content clearfix">
+							<div class="box-item" v-for='p in item.data'>
+								<img :src="p.src" alt="">
+								<p>{{p.name}}</p>
+							</div>
+							
 						</div>
-						
 					</div>
 				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -46,6 +49,7 @@
 <script>
 import BackHeader from '@/components/BackHeader'
 import $ from 'jquery'
+import BScroll from 'better-scroll'
 	export default{
 		name:'Category',
 		data(){
@@ -64,36 +68,36 @@ import $ from 'jquery'
 		},
 		methods:{
 			scroll(){
-				var scrollTop = this.$refs.rightView.scrollTop;
-				//console.log(scrollTop);
-				var index = this.indexOf(this.offset, scrollTop);
-				if(index !== -1){
-					this.menuLiIndex = index;
-					// 是否需要通过scrollTop来移动左侧的menu list
-					var oli = this.$refs.leftView.getElementsByTagName('li');
-					console.log(oli[index].offsetTop / this.$refs.leftView.clientHeight);
+				// var scrollTop = this.$refs.rightView.scrollTop;
+				// //console.log(scrollTop);
+				// var index = this.indexOf(this.offset, scrollTop);
+				// if(index !== -1){
+				// 	this.menuLiIndex = index;
+				// 	// 是否需要通过scrollTop来移动左侧的menu list
+				// 	var oli = this.$refs.leftView.getElementsByTagName('li');
+				// 	console.log(oli[index].offsetTop / this.$refs.leftView.clientHeight);
 
-					if(oli[index].offsetTop / this.$refs.leftView.clientHeight > 0.8){
-						this.$refs.leftView.scrollTop = this.$refs.leftView.scrollTop + oli[index].clientHeight;
-					}else if(oli[index].offsetTop / this.$refs.leftView.clientHeight < 0.2){
-						this.$refs.leftView.scrollTop = this.$refs.leftView.scrollTop - oli[index].clientHeight;
-					}
+				// 	if(oli[index].offsetTop / this.$refs.leftView.clientHeight > 0.8){
+				// 		this.$refs.leftView.scrollTop = this.$refs.leftView.scrollTop + oli[index].clientHeight;
+				// 	}else if(oli[index].offsetTop / this.$refs.leftView.clientHeight < 0.2){
+				// 		this.$refs.leftView.scrollTop = this.$refs.leftView.scrollTop - oli[index].clientHeight;
+				// 	}
 					
-				}
+				// }
 			},
 			jumpTo(index){
 				this.menuLiIndex = index;
 				//this.$refs.rightView.scrollTop = this.offset[index];
 				//this.$refs.backHeader.showMe();
-				$(this.$refs.rightView).animate({
-					scrollTop:this.offset[index]+'px'
-				})
+				// $(this.$refs.rightView).animate({
+				// 	scrollTop:this.offset[index]+'px'
+				// })
+
 			},
 			indexOf(arr, num){
 				for(let i=0;i<arr.length;i++){
-					if(Math.abs(arr[i]-num)<=10){
+					if(i+1<arr.length && num>=arr[i] && num <= arr[i+1])
 						return i;
-					}
 				}
 				return -1;
 			},
@@ -105,7 +109,57 @@ import $ from 'jquery'
 					this.loading = false;
 					// 获取到数据后 计算offset
 					this.getOffset();
-					console.log(res.data);
+					// console.log(res.data);
+
+
+					var _this = this;
+			    	this.$nextTick(() => {
+				    	if(!_this.scroll_l){
+							_this.scroll_l = new BScroll(_this.$refs.leftView,{
+								click:true,
+								probeType:3
+							})
+							_this.scroll_r = new BScroll(_this.$refs.rightView,{
+								click:true,
+								probeType:3
+							})
+						}else{
+							_this.scroll_l.refresh();
+							_this.scroll_r.refresh();
+						}
+						_this.scroll_r.on('scrollEnd', function(){
+							// 获取右侧当前移动的y轴距离  _this.scroll_r.y
+							// console.log("Now position is y: "+_this.scroll_r.y);
+							let y = _this.scroll_r.y;
+
+							let index = _this.indexOf(_this.offset, -y);
+							if(index != -1){
+								_this.menuLiIndex = index;
+								// 对当前下标进行判断是否需要 手动下滑左侧菜单栏
+								if(_this.menuLiIndex>=10){
+									_this.scroll_l.scrollTo(0,_this.scroll_l.maxScrollY,300);
+								}
+								if(_this.menuLiIndex<=5){
+									_this.scroll_l.scrollTo(0,0,300);
+								}
+							}
+							
+						})
+						_this.scroll_l.on('scroll',function(){
+							// 获取左侧当前移动的y轴距离 _this.scroll_l.y
+							// console.log("Now position is y: "+_this.scroll_l.y);
+
+						})
+						_this.scroll_l.on('touchEnd',function(xy){
+							setTimeout(function(){
+								// console.log(_this.menuLiIndex);
+
+								_this.scroll_r.scrollTo(0,-(_this.offset[_this.menuLiIndex]),300);
+
+							},20)
+						})
+				    })
+
 				}).catch(err=>{
 					console.log(err);
 				})

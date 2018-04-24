@@ -3,39 +3,42 @@
 
 		<!-- <back-header :title='title' ref='backHeader'></back-header> -->
 
-		<div class="cart-content">
-			
-			<a class="not-login" v-if='$store.state.shopcart.list.length === 0'><p class="lowprice">登陆后享受更多优惠</p><p class="tologin">去登录<i class="icon">&#xe64a;</i></p></a>
-			
-			<div class="enpty-cart" v-if='$store.state.shopcart.list.length === 0'>
-				<a><span><i class="icon">&#xe680;</i>购物车还是空的</span><span class="guang">去逛逛</span></a>
-			</div>
-			<div class="list-content">
-				<div class="list-item" v-for='(item,index) in $store.state.shopcart.list'>
-					<div class="img">
-						<img :src="item.href" alt="">
-					</div>
-					<div class="wenzi">
-						<p>{{item.name}}</p>
-						<p>售价：{{item.price}}元</p>
-						<div class="add-delete">
-							<p><span class="reduce-span" @click='reduce(index)'>-</span><span>{{item.count}}</span><span class="add-span" @click='add(index)'>+</span></p>
-							<i class="icon delete-icon" @click='deleteOne(index)'>&#xe619;</i>
+		<div class="cart-content" ref='wrapper'>
+			<div class="content">
+				
+				<a class="not-login" v-if='$store.state.shopcart.list.length === 0'><p class="lowprice">登陆后享受更多优惠</p><p class="tologin">去登录<i class="icon">&#xe64a;</i></p></a>
+				
+				<div class="enpty-cart" v-if='$store.state.shopcart.list.length === 0'>
+					<a><span><i class="icon">&#xe680;</i>购物车还是空的</span><span class="guang">去逛逛</span></a>
+				</div>
+				<div class="list-content">
+					<div class="list-item" v-for='(item,index) in $store.state.shopcart.list'>
+						<div class="img">
+							<img :src="item.href" alt="">
+						</div>
+						<div class="wenzi">
+							<p>{{item.name}}</p>
+							<p>售价：{{item.price}}元</p>
+							<div class="add-delete">
+								<p><span class="reduce-span" @click='reduce(index)'>-</span><span>{{item.count}}</span><span class="add-span" @click='add(index)'>+</span></p>
+								<i class="icon delete-icon" @click='deleteOne(index)'>&#xe619;</i>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="guess">
-				<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/e95ade2750a7fde92369b416c7d3176d.jpg" alt="">
-			</div>
-			<div class="tj clearfix">
-				<div class="tj-items" v-for='(item,index) in tj_items' :class="{'left':index%2===0,'right':index%2!==0}" @click='$router.push({path:"/product/1001"})'>
-					<img :src="item.src" alt="">
-					<p class="title">{{item.title}}</p>
-					<p class="con">{{item.con}}</p>
-					<p class="price">￥{{item.money}}</p>
+				<div class="guess">
+					<img src="http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/e95ade2750a7fde92369b416c7d3176d.jpg" alt="">
+				</div>
+				<div class="tj clearfix">
+					<div class="tj-items" v-for='(item,index) in tj_items' :class="{'left':index%2===0,'right':index%2!==0}" @click='$router.push({path:"/product/1001"})'>
+						<img :src="item.src" alt="">
+						<p class="title">{{item.title}}</p>
+						<p class="con">{{item.con}}</p>
+						<p class="price">￥{{item.money}}</p>
+					</div>
 				</div>
 			</div>
+			
 		</div>
 
 		<div class="cart-bottom" v-if='$store.state.shopcart.list.length !== 0'>
@@ -50,6 +53,7 @@
 </template>
 <script>
 import BackHeader from '@/components/BackHeader'
+import BScroll from 'better-scroll'
 	export default{
 		name:'ShopCart',
 		data(){
@@ -139,6 +143,18 @@ import BackHeader from '@/components/BackHeader'
 				this.$emit('openbottom');
 			}
 		},
+		mounted(){
+			var _this = this;
+	    	this.$nextTick(() => {
+		    	if(!_this.scroll){
+					_this.scroll = new BScroll(_this.$refs.wrapper,{
+						click:true
+					})
+				}else{
+					_this.scroll.refresh();
+				}
+		    })
+		}
 		// beforeRouteEnter(to, from, next){
 		// 	next(vm=>{
 		// 		vm.$refs.backHeader.showMe();

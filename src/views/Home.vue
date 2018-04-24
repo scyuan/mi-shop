@@ -23,44 +23,47 @@
 				
 			</div>
 		</header>
-		<div class="scroll-box">
-			<swiper :options="swiperOption" ref="mySwiper">
-			    <!-- slides -->
-			    <swiper-slide v-for='item in banner_list' >
-			    	<img :data-src="item.src" class="swiper-lazy" @click='$router.push({path:"/product/1001"})'>
-            		<div class="swiper-lazy-preloader"></div>
-			    </swiper-slide>
-			    
-			    <!-- Optional controls -->
-			    <div class="swiper-pagination"  slot="pagination"></div>
-			</swiper>
+		<div class="scroll-box wrapper" ref='wrapper'>
+			<div class="content">
+				<swiper :options="swiperOption" ref="mySwiper">
+				    <!-- slides -->
+				    <swiper-slide v-for='item in banner_list' >
+				    	<img :data-src="item.src" class="swiper-lazy" @click='$router.push({path:"/product/1001"})'>
+	            		<div class="swiper-lazy-preloader"></div>
+				    </swiper-slide>
+				    
+				    <!-- Optional controls -->
+				    <div class="swiper-pagination"  slot="pagination"></div>
+				</swiper>
 
-			<div class="nav-mid">
-				<a href="javascript:;" v-for ='img in nav_mid'><img v-lazy="img" alt=""></a>
-			</div>
-
-			<div class="zhijiang clearfix">
-				<div class="zj-left">
-					<img v-lazy="zhijiang[0]" alt="">
+				<div class="nav-mid">
+					<a href="javascript:;" v-for ='img in nav_mid'><img v-lazy="img" alt=""></a>
 				</div>
-				<div class="zj-right">
-					<img v-lazy="zhijiang[1]" alt="">
-					<img v-lazy="zhijiang[2]" alt="">
+
+				<div class="zhijiang clearfix">
+					<div class="zj-left">
+						<img v-lazy="zhijiang[0]" alt="">
+					</div>
+					<div class="zj-right">
+						<img v-lazy="zhijiang[1]" alt="">
+						<img v-lazy="zhijiang[2]" alt="">
+					</div>
+					
+				</div>
+				<div class="tj" v-for='img in tj_imgs'>
+					<img v-lazy='img' alt="">
 				</div>
 				
-			</div>
-			<div class="tj" v-for='img in tj_imgs'>
-				<img v-lazy='img' alt="">
-			</div>
-			
-			<div class="tj clearfix">
-				<div class="tj-items" v-for='(item,index) in tj_items' :class="{'left':index%2===0,'right':index%2!==0}" @click='$router.push({path:"/product/1001"})'>
-					<img v-lazy="item.src">
-					<p class="title">{{item.title}}</p>
-					<p class="con">{{item.con}}</p>
-					<p class="price">￥{{item.money}}</p>
+				<div class="tj clearfix">
+					<div class="tj-items" v-for='(item,index) in tj_items' :class="{'left':index%2===0,'right':index%2!==0}" @click='$router.push({path:"/product/1001"})'>
+						<img v-lazy="item.src">
+						<p class="title">{{item.title}}</p>
+						<p class="con">{{item.con}}</p>
+						<p class="price">￥{{item.money}}</p>
+					</div>
 				</div>
 			</div>
+			
 		</div>
 		
 	</div>
@@ -68,6 +71,7 @@
 <script>
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import BScroll from 'better-scroll'
 	export default{
 		name:'Home',
 		data(){
@@ -250,6 +254,18 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 	        return this.$refs.mySwiper.swiper
 	      }
 	    },
+	    mounted(){
+	    	var _this = this;
+	    	this.$nextTick(() => {
+		    	if(!_this.scroll){
+					_this.scroll = new BScroll(_this.$refs.wrapper,{
+						click:true
+					})
+				}else{
+					_this.scroll.refresh();
+				}
+		    })
+	    }
 	}
 </script>
 
@@ -426,3 +442,4 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 	overflow-y: auto;
 }
 </style>
+
