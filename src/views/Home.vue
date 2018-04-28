@@ -55,11 +55,11 @@
 				</div>
 				
 				<div class="tj clearfix">
-					<div class="tj-items" v-for='(item,index) in tj_items' :class="{'left':index%2===0,'right':index%2!==0}" @click='$router.push({path:"/product/1001"})'>
-						<img v-lazy="item.src">
-						<p class="title">{{item.title}}</p>
-						<p class="con">{{item.con}}</p>
-						<p class="price">￥{{item.money}}</p>
+					<div class="tj-items" v-for='(item,index) in tj_items' :class="{'left':index%2===0,'right':index%2!==0}" @click='$router.push({path:item.href})'>
+						<img v-lazy="item.img">
+						<p class="title">{{item.name}}</p>
+						<p class="con">{{item.desc}}</p>
+						<p class="price">￥{{item.price}} <span class="origin_price" v-show='item.origin_price !== ""'>￥{{item.origin_price}}</span></p>
 					</div>
 				</div>
 			</div>
@@ -77,10 +77,11 @@ import BScroll from 'better-scroll'
 		data(){
 			return{
 				nav_mid:[
-					"http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/2018011022292984819.png",
-					"http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/2018011022292372054.png",
-					"http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/2018011022291629252.png",
-					"http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/2018011022290460400.png"
+					"//i8.mifile.cn/v1/a1/6d64ef02-bb5c-da49-45cb-7d6861885b29!144x152.webp",
+					"//i8.mifile.cn/v1/a1/d29e748c-0177-5b4c-d2ab-401070713bac!144x152.webp",
+					"//cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/9173298cc0297ce1803c43485e525358.jpg?thumb=1&w=144&h=152",
+					"//i8.mifile.cn/v1/a1/e560f98a-48bb-25a1-daa2-72bff8cc7c69!144x152.webp",
+					"//cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/938f75d98244629b0d29bfc9c4323f8d.png?thumb=1&w=144&h=152"
 				],
 				zhijiang:[
 					"http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/2018011114551289342.png",
@@ -95,76 +96,7 @@ import BScroll from 'better-scroll'
 				],
 				navActiveIndex:0,
 				tj_items:[
-					 {
-			            src: 'http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/65eeeedca463345b0cfd36e042185af3.jpg',
-			            title: '米家感应灯',
-			            con: '举步之明，光明立现',
-			            money: 49,
-			            href: '/detail/1008'
-			          },
-			          {
-			            src: 'http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/65eeeedca463345b0cfd36e042185af3.jpg',
-			            title: '米家感应灯',
-			            con: '举步之明，光明立现',
-			            money: 49,
-			            href: '/detail/1008'
-			          },
-			          {
-			            src: 'http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/65eeeedca463345b0cfd36e042185af3.jpg',
-			            title: '米家感应灯',
-			            con: '举步之明，光明立现',
-			            money: 49,
-			            href: '/detail/1008'
-			          },
-			          {
-			            src: 'http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/65eeeedca463345b0cfd36e042185af3.jpg',
-			            title: '米家感应灯',
-			            con: '举步之明，光明立现',
-			            money: 49,
-			            href: '/detail/1008'
-			          },
-			          {
-			            src: 'http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/65eeeedca463345b0cfd36e042185af3.jpg',
-			            title: '米家感应灯',
-			            con: '举步之明，光明立现',
-			            money: 49,
-			            href: '/detail/1008'
-			          },
-			          {
-			            src: 'http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/65eeeedca463345b0cfd36e042185af3.jpg',
-			            title: '米家感应灯',
-			            con: '举步之明，光明立现',
-			            money: 49,
-			            href: '/detail/1008'
-			          },
-			          {
-			            src: 'http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/65eeeedca463345b0cfd36e042185af3.jpg',
-			            title: '米家感应灯',
-			            con: '举步之明，光明立现',
-			            money: 49,
-			            href: '/detail/1008'
-			          },
-			          {
-			            src: 'http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/65eeeedca463345b0cfd36e042185af3.jpg',
-			            title: '米家感应灯',
-			            con: '举步之明，光明立现',
-			            money: 49,
-			            href: '/detail/1008'
-			          },
-			          {
-			            src: 'http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/65eeeedca463345b0cfd36e042185af3.jpg',
-			            title: '米家感应灯',
-			            con: '举步之明，光明立现',
-			            money: 49,
-			            href: '/detail/1008'
-			          },
-			          {
-			            src: 'http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/65eeeedca463345b0cfd36e042185af3.jpg',
-			            title: '米家感应灯',
-			            con: '举步之明，光明立现',
-			            money: 49,
-			            href: '/detail/1008'
-			          }
+					 
 				],
 				nav_items:[
 					{
@@ -242,6 +174,26 @@ import BScroll from 'better-scroll'
 			go(href){
 				this.$router.push({path:href});
 			},
+			getTuijian(){
+				var _this = this;
+
+				this.$http.get('https://www.easy-mock.com/mock/5ad6eb960a6d0e1000b57d01/mi-shop/home_tj')
+				.then(res=>{
+					this.tj_items = res.data.data.home_tj;
+					// console.log(res.data.data.home_tj);
+
+					// 然后重新计算better-scroll的高度
+					_this.$nextTick(()=>{
+						if(!_this.scroll){
+							_this.scroll = new BScroll(_this.$refs.wrapper,{
+								click:true
+							})
+						}else{
+							_this.scroll.refresh();
+						}
+					})
+				})
+			}
 		},
 		components:{
 			swiper, swiperSlide
@@ -253,6 +205,9 @@ import BScroll from 'better-scroll'
 	      swiper() {
 	        return this.$refs.mySwiper.swiper
 	      }
+	    },
+	    created(){
+	    	this.getTuijian();
 	    },
 	    mounted(){
 	    	var _this = this;
@@ -272,6 +227,9 @@ import BScroll from 'better-scroll'
 <style scoped>
 .home-header{
 	background: #f2f2f2;
+	box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+	position: relative;
+	z-index: 9999;
 }
 .header-search{
 	height: 1.3333rem;
@@ -428,10 +386,15 @@ import BScroll from 'better-scroll'
 .tj-items .con{
 	font-size: 0.32rem;
 	color: #a2a2a2;
+	font-weight: 300;
 }
 .tj-items .price{
 	color: #ea625b;
-	font-weight: bold;
+}
+.tj-items .origin_price{
+	color: #ccc;
+	text-decoration: line-through;
+	font-size: 0.32rem;
 }
 .scroll-box{
 	position: absolute;

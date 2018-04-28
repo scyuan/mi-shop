@@ -7,7 +7,7 @@
       <back-header :title='title' ref='backheader'></back-header>
 
       <transition :name='transitionName'>
-        <keep-alive include='Category,Home,Personal,Product,Search,ShopCart' >  
+        <keep-alive include='Category,Home,Personal,Search,ShopCart' >  
           <router-view v-on:openbottom='openbottom()'></router-view>
         </keep-alive>
       </transition>
@@ -215,6 +215,15 @@ export default {
   transition: all 0.3s;
 }
 
+.fade-enter,.fade-leave-to{
+  opacity: 0;
+}
+.fade-enter-to,.fade-leave{
+  opacity: 1;
+}
+.fade-enter-active,.fade-leave-active{
+  transition: all 0.3s;
+}
 .icon{
   font-family: 'iconfont';
   font-style: normal;

@@ -5,7 +5,10 @@
 				<i class="icon back" @click='$router.back()'>&#xe624;</i>
 				<swiper :options="swiperOption" ref="mySwiper">
 				    <!-- slides -->
-				    <swiper-slide v-for='item in banner_list'><img :src="item.src" alt=""></swiper-slide>
+				    <swiper-slide v-for='item in product.banner'>
+				    	<img v-lazy="item" alt="">
+				    	
+				    </swiper-slide>
 				    
 				    <!-- Optional controls -->
 				    <div class="swiper-pagination"  slot="pagination"></div>
@@ -13,10 +16,10 @@
 			</div>
 
 			<div class="product-panel">
-				<p class="desc">小米Note3 人脸解锁</p>
-				<p class="activity"> 【手机品牌日限时特惠：128GB 今早10点限时特价秒杀。6+64GB直降200元，4+64GB直降100元。全系可享小米分期最高6期免息】</p>
-				<p class="more-desc"> 1600万美颜自拍 / 2倍变焦双摄，四轴光学防抖 / 5.5"护眼屏 / 超轻四曲面，7系铝金属边框。 </p>
-				<p class="price"><span class="price-now">￥1999</span><span class="price-before">￥2999</span><span class="price-activity">直降1000元</span></p>
+				<p class="desc">{{product.name}}</p>
+				<p class="activity">{{product.desc.cuxiao}}</p>
+				<p class="more-desc">{{product.desc.normal}}</p>
+				<p class="price"><span class="price-now">￥{{product.price}}</span><span class="price-before">￥{{product.origin_price}}</span><span class="price-activity">直降1000元</span></p>
 				<div class="line">
 					<span>促销</span>
 					<p><span class="z">赠品</span>赠吃到饱卡</p>
@@ -47,7 +50,7 @@
 			</div>
 
 			<div class="product-bg">
-				<img v-for='img in img_list' v-lazy="img" alt="">
+				<img v-for='img in product.big_img' v-lazy="img" alt="">
 			</div>
 			
 		</div>
@@ -68,6 +71,11 @@
 				加入购物车
 			</div>
 		</div>
+		<transition name="fade">
+			<div class="modal" v-if='show_modal'>
+				<p>加载中...</p>
+			</div>
+		</transition>
 	</div>
 </template>
 <script>
@@ -80,6 +88,17 @@ import BScroll from 'better-scroll'
 		name:'Product',
 		data(){
 			return{
+				show_modal:true,
+				product:{
+					banner:[],
+					name:'',
+					desc:{
+						cuxiao:'',
+						normal:''
+					},
+					big_img:''
+				},
+				// product:'',
 				img_list:[
 					"//i8.mifile.cn/v1/a1/f6b42e48-8af9-c1c1-5df2-eb1973499aae.jpg?w=1080&h=1735&s=192.6",
 					"//i8.mifile.cn/v1/a1/eb3d5e39-000d-bfb9-acce-e346876cfa94.jpg?w=1080&h=1387&s=171.9",
@@ -91,20 +110,12 @@ import BScroll from 'better-scroll'
 					"//i8.mifile.cn/v1/a1/f8e52783-b598-2dfd-7057-52c285515119.jpg?w=1080&h=1735&s=191.4"
 				],
 				banner_list:[
-					{
-						src:'//cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/7e98be403a5f4277adba84acaecb9c76.jpg?bg=6D96C7'
-					},
-					{
-						src:'//cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/568b07688b343f667c7040a968f3ee97.jpg?bg=FFFFFF'
-					},
-					{
-						src:'//cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/4ee66087b538923642701afa069f0fb9.jpg?bg=41424E'
-					},
-					{
-						src:'//cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/e0f474b9d70fea836f25c50e93d46af7.jpg?bg=3E404B'
-					}
+					
 				],
 				swiperOption: {
+				  lazy: {
+				    loadPrevNext: true,
+				  },
 				  // 最左最右禁止滑动
 		          resistanceRatio : 0,
 		          pagination:{
@@ -171,10 +182,23 @@ import BScroll from 'better-scroll'
 		        });
 
         		parabola.start();
+			},
+			getData(){
+				this.$http.get(" https://www.easy-mock.com/mock/5ad6eb960a6d0e1000b57d01/mi-shop"+this.$route.path)
+				.then(res=>{
+					console.log(res.data);
+					// this.banner_list = res.data.data.banner;
+
+					this.product = res.data.data;
+					this.show_modal = false;
+				})
 			}
 		},
 		components:{
 			swiper, swiperSlide
+		},
+		created(){
+			this.getData();
 		},
 		mounted(){
 			var _this = this;
@@ -373,5 +397,17 @@ import BScroll from 'better-scroll'
 	background: rgb(255,74,0);
 	color: #fff;
 	border-radius: 0.8rem;
+}
+.modal{
+	position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 1.43rem;
+    right: 0;
+    background: rgba(0,0,0,0.8);
+    color: #fff;
+    padding-top: 5.333333rem;
+    text-align: center;
+   	font-size: 0.533333rem;
 }
 </style>
